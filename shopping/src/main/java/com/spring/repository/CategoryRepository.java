@@ -12,9 +12,14 @@ import com.spring.model.Category;
 @Transactional
 public interface CategoryRepository extends JpaRepository<Category, Long>  {
 	
-	List<Category> findAll();
-	Category findById(Integer id);
+	//List<Category> findAll();
+	public Category findById(Integer id);
 	
 	Category findByCategoryName(String name);
+	
+	List<Category> findAll();
+	
+	Category findById(String id);
+	
 
 }

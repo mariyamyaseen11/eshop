@@ -2,12 +2,17 @@ package com.spring.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Bufcart implements Serializable {
@@ -28,6 +33,10 @@ public class Bufcart implements Serializable {
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
+	
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="cart_id")
+    private List<CartDetails> cartDetails;
 
 	@Override
 	public String toString() {
@@ -102,4 +111,14 @@ public class Bufcart implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+
+	public List<CartDetails> getCartDetails() {
+		return cartDetails;
+	}
+
+	public void setCartDetails(List<CartDetails> cartDetails) {
+		this.cartDetails = cartDetails;
+	}
+	
+	
 }

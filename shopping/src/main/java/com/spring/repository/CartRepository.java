@@ -13,6 +13,7 @@ import com.spring.model.Bufcart;
 public interface CartRepository extends JpaRepository<Bufcart, Long> {
 
 	List<Bufcart> findByEmail(String email);
+	//Bufcart findByEmail(String email);
 
 	Bufcart findByBufcartIdAndEmail(int bufcartId, String email);
 

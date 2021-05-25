@@ -4,6 +4,7 @@ public class serverResp {
 	private String status;
 	private String message;
 	private String AUTH_TOKEN;
+	private String userType;
 
 	public String getAUTH_TOKEN() {
 		return AUTH_TOKEN;
@@ -41,6 +42,14 @@ public class serverResp {
 
 	public void setObject(Object object) {
 		this.object = object;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 }

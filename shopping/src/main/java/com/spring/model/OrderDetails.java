@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +25,12 @@ public class OrderDetails implements Serializable{
 	private Double total;
 	private Integer size;
 	private String color;
-	private Integer orderId;
+	//private Integer orderId;
+	
+	@ManyToOne
+	private Orders order;
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -79,11 +85,11 @@ public class OrderDetails implements Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public Integer getOrderId() {
-		return orderId;
+	public Orders getOrder() {
+		return order;
 	}
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
+	public void setOrder(Orders order) {
+		this.order = order;
 	}
 	
 }

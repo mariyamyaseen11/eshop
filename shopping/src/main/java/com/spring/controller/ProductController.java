@@ -18,6 +18,7 @@ import com.spring.model.Category;
 import com.spring.model.Product;
 import com.spring.repository.CategoryRepository;
 import com.spring.repository.ProductRepository;
+import com.spring.service.ProductService;
 
 @CrossOrigin(origins = WebConstants.ALLOWED_URL)
 @RestController
@@ -29,11 +30,31 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@Autowired
+	private ProductService productService;
+	
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@GetMapping("/categories")
+//	public ResponseEntity<List<Category>> categories(@RequestHeader(name = WebConstants.USER_AUTH_TOKEN) String AUTH_TOKEN) throws IOException {
+//		List<Category> categories = categoryRepo.findAll();
+//		return new ResponseEntity<List<Category>>(categories, HttpStatus.ACCEPTED);
+//	}
+	
+	
+	@GetMapping("/category")
+	public ResponseEntity<Category> getCategoryById(@RequestParam Integer id){
+		Category cat = productService.getCategory(id);
+		return new ResponseEntity<Category>(cat, HttpStatus.ACCEPTED);
+		
+		
+	}
+	
 	@GetMapping("/categories")
-	public ResponseEntity<List<Category>> categories(@RequestHeader(name = WebConstants.USER_AUTH_TOKEN) String AUTH_TOKEN) throws IOException {
-		List<Category> categories = categoryRepo.findAll();
-		return new ResponseEntity<List<Category>>(categories, HttpStatus.ACCEPTED);
+	public ResponseEntity<List<String>> categories() {
+		
+		List<String> categories = productService.getCategories();
+		return new ResponseEntity<List<String>>(categories, HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("/product")
@@ -51,6 +72,16 @@ public class ProductController {
 		return new ResponseEntity<List<Product>>(productList, HttpStatus.ACCEPTED);
 		
 	}
+	
+	@GetMapping("/allProducts")
+	public ResponseEntity<List<Product>> getAllProducts() {
+		
+		List<Product> list = productRepo.findAll();
+		
+		return new ResponseEntity<List<Product>>(list, HttpStatus.ACCEPTED);
+		
+	}
+	
 	
 	
 }

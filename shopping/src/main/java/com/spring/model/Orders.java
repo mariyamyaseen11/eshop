@@ -2,11 +2,15 @@ package com.spring.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +30,11 @@ public class Orders implements Serializable{
 	private Integer shippedId;
 	private String transactionStatus;
 	private Date paymentDate;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="order_id")
+    private List<OrderDetails> orderDetails;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -79,6 +88,12 @@ public class Orders implements Serializable{
 	}
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
+	}
+	public List<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 	
 	
